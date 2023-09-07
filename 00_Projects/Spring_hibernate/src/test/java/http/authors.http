@@ -1,0 +1,2 @@
+### Get author by id
+GET localhost:8080/authors/get?id=1
