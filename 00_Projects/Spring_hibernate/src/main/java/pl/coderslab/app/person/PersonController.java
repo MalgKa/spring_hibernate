@@ -3,9 +3,8 @@ package pl.coderslab.app.person;
 import org.springframework.web.bind.annotation.*;
 
 
-
 @RestController
-@RequestMapping("persons")
+@RequestMapping("/persons")
 public class PersonController {
 
     private final PersonDao personDao;
@@ -14,42 +13,34 @@ public class PersonController {
         this.personDao = personDao;
     }
 
-
-    @GetMapping("get")
-    public String get(@RequestParam Long id){
-        Person person= personDao.findById(id);
+    @PostMapping
+    public String create(Person person) {
+        personDao.save(person);
         return person.toString();
     }
 
-
-    @PostMapping("create")
-    public void create(@RequestParam String login, @RequestParam String password, @RequestParam String email){
-        Person person = new Person();
-        person.setLogin(login);
-        person.setPassword(password);
-        person.setEmail(email);
-        personDao.save(person);
-    }
-
-    @PostMapping("update")
-    public void update(@RequestParam Long id, @RequestParam String login, @RequestParam String password, @RequestParam String email){
+    @GetMapping("/{id}")
+    public String get(@PathVariable Long id) {
         Person person = personDao.findById(id);
-        person.setLogin(login);
-        person.setPassword(password);
-        person.setEmail(email);
-        personDao.update(person);
+        return person.toString();
     }
 
-    @PostMapping("delete")
-    public void delete(@RequestParam Long id){
+    @PostMapping("/{id}")
+    public String update( @PathVariable Long id, Person person) {
+        Person existing = personDao.findById(id);
+        existing.setEmail(person.getEmail());
+        System.out.println(person);
+        PersonDetails details = person.getDetails();
+        existing.getDetails().setFirstName(details.getFirstName());
+        existing.getDetails().setLastName(details.getLastName());
+        personDao.update(existing);
+        return existing.toString();
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable Long id) {
         Person person = personDao.findById(id);
         personDao.delete(person);
+        return person.toString();
     }
-
-
-
-
-
-
 }
-

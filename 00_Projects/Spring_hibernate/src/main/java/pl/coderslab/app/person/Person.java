@@ -11,21 +11,30 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String login;
-
     private String password;
     private String email;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private PersonDetails personDetails;
+    private PersonDetails details;
 
-    public PersonDetails getPersonDetails() {
-        return personDetails;
+    @Override
+    public String toString() {
+        return "pl.coderslab.springhibernate.entity.Person{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", details=" + details +
+                '}';
     }
 
-    public void setPersonDetails(PersonDetails personDetails) {
-        this.personDetails = personDetails;
+    public PersonDetails getDetails() {
+        return details;
+    }
+
+    public void setDetails(PersonDetails details) {
+        this.details = details;
     }
 
     public Long getId() {
@@ -59,16 +68,4 @@ public class Person {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", personDetails=" + personDetails +
-                '}';
-    }
 }
-

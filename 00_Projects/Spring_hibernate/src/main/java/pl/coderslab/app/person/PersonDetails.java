@@ -6,17 +6,32 @@ import javax.persistence.*;
 @Entity
 @Table(name="person_details")
 public class PersonDetails {
-    @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
-    private Integer streetNumber;
+    @Column(name = "street_number")
+    private String streetNumber;
     private String street;
     private String city;
 
-
-    @OneToOne(mappedBy = "personDetails")
+    @OneToOne(mappedBy = "details")
     private Person person;
+
+    @Override
+    public String toString() {
+        return "pl.coderslab.springhibernate.entity.PersonDetails{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", streetNumber='" + streetNumber + '\'' +
+                ", street='" + street + '\'' +
+                ", city='" + city + '\'' +
+                '}';
+    }
 
     public Person getPerson() {
         return person;
@@ -50,11 +65,11 @@ public class PersonDetails {
         this.lastName = lastName;
     }
 
-    public Integer getStreetNumber() {
+    public String getStreetNumber() {
         return streetNumber;
     }
 
-    public void setStreetNumber(Integer streetNumber) {
+    public void setStreetNumber(String streetNumber) {
         this.streetNumber = streetNumber;
     }
 
@@ -72,18 +87,5 @@ public class PersonDetails {
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    @Override
-    public String toString() {
-        return "PersonDetails{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", streetNumber=" + streetNumber +
-                ", street='" + street + '\'' +
-                ", city='" + city + '\'' +
-                ", person=" + person +
-                '}';
     }
 }

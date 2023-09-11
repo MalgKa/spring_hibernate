@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -29,5 +31,11 @@ public class PublisherDao {
     public Publisher findById(Long id){
         return entityManager.find(Publisher.class, id);
     }
+
+    public List<Publisher> findAll(){
+        Query query = entityManager.createQuery("SELECT p FROM Publisher p ORDER BY id");
+        return query.getResultList();
+    }
+
 
 }

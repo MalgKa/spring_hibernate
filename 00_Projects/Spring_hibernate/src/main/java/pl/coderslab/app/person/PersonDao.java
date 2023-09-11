@@ -12,23 +12,21 @@ import javax.persistence.PersistenceContext;
 public class PersonDao {
 
     @PersistenceContext
-    EntityManager entityManager;
+    EntityManager em;
 
-    public void save(Person person){
-        entityManager.persist(person);
+    public void save(Person entity) {
+        em.persist(entity);
     }
 
-
-    public Person findById(Long id){
-        return entityManager.find(Person.class, id);
-    }
-    public void update(Person person){
-        entityManager.merge(person);
+    public void update(Person entity) {
+        em.merge(entity);
     }
 
-    public void delete(Person person){
-        entityManager.remove(entityManager.contains(person)? person:entityManager.merge(person));
+    public void delete(Person entity) {
+        em.remove(em.contains(entity) ? entity : em.merge(entity));
     }
 
-
+    public Person findById(Long id) {
+        return em.find(Person.class, id);
+    }
 }

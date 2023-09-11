@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -28,6 +30,12 @@ public class AuthorDao {
 
     public void delete(Author author){
         entityManager.remove(entityManager.contains(author)? author:entityManager.merge(author));
+    }
+
+    public List<Author> findAll(){
+        Query query = entityManager.createQuery("select a FROM Author a");
+       return query.getResultList();
+
     }
 
 
