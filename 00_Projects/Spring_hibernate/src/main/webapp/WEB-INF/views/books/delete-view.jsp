@@ -15,7 +15,7 @@
     </div>
     <div>
         <button>yes</button>
-        <button><a href="/view/book/list">no</a></button>
+        <button><a style="text-decoration: none" href="/view/book/list">no</a></button>
     </div>
 </form:form>
 </body>

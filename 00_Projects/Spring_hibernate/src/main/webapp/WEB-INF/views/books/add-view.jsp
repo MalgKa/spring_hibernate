@@ -22,11 +22,11 @@
         </label>
     </div>
     <div>
-<%--      authors:--%>
-<%--            <form:select path="authors">--%>
-<%--                <form:options items="${authorList}"/>--%>
-<%--            </form:select>--%>
-<%--    </div>--%>
+      authors:
+            <form:select path="authors" multiple="true">
+                <form:options items="${authorList}" itemValue="id" itemLabel="lastName"/>
+            </form:select>
+    </div>
     <div>
         <label>publisher:
             <form:select path="publisher.id" items="${publisherList}" itemLabel="name" itemValue="id"/>
